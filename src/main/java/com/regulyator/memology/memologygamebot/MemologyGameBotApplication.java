@@ -1,4 +1,4 @@
-package com.regulyator.memology.bot.memologygamebot;
+package com.regulyator.memology.memologygamebot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

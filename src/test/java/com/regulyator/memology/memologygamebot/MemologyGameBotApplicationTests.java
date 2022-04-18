@@ -1,4 +1,4 @@
-package com.regulyator.memology.bot.memologygamebot;
+package com.regulyator.memology.memologygamebot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
