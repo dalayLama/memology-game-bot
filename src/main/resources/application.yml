@@ -1,0 +1,5 @@
+memology:
+  bot:
+    name: "memology-bot-name"
+    token: "token"
+    path: "path"
