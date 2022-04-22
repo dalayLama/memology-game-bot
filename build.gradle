@@ -8,6 +8,10 @@ group = 'com.regulyator.memology.bot'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
+ext {
+	telegramBotVersion = '6.0.1'
+}
+
 configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
@@ -19,9 +23,12 @@ repositories {
 }
 
 dependencies {
+	implementation "org.telegram:telegrambots-spring-boot-starter:${telegramBotVersion}"
 	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
