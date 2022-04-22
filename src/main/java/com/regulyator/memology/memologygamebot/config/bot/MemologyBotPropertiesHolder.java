@@ -1,4 +1,4 @@
-package com.regulyator.memology.config;
+package com.regulyator.memology.memologygamebot.config.bot;
 
 import lombok.AccessLevel;
 import lombok.Getter;

@@ -1,5 +1,2 @@
-memology:
-  bot:
-    name: "memology-bot-name"
-    token: "token"
-    path: "path"
+server:
+  port: 8090
