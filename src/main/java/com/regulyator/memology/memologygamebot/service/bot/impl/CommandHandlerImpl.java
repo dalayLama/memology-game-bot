@@ -2,7 +2,9 @@ package com.regulyator.memology.memologygamebot.service.bot.impl;
 
 import com.regulyator.memology.memologygamebot.bot.command.Command;
 import com.regulyator.memology.memologygamebot.service.bot.CommandHandler;
+import lombok.NonNull;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +20,13 @@ public class CommandHandlerImpl implements CommandHandler {
     }
 
     @Override
-    public boolean handleCommand(Command command) {
-        return false;
+    public boolean handleCommand(String command, @NonNull Message message) {
+        return commandMap.containsKey(command)
+                && commandMap.get(command).handle(message);
+    }
+
+    @Override
+    public boolean isCommandExist(Command command) {
+        return commandMap.containsKey(command.getCommandToken());
     }
 }
