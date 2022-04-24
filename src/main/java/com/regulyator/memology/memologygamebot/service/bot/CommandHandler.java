@@ -1,11 +1,12 @@
 package com.regulyator.memology.memologygamebot.service.bot;
 
-import com.regulyator.memology.memologygamebot.bot.command.Command;
+import org.telegram.telegrambots.meta.api.interfaces.BotApiObject;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public interface CommandHandler {
+public interface CommandHandler<E extends BotApiObject> {
 
-    boolean handleCommand(String command, Message message);
+    BotApiMethod<E> handleCommand(String command, Message message);
 
-    boolean isCommandExist(Command command);
+    boolean isCommandExist(String command);
 }

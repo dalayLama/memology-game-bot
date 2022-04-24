@@ -10,19 +10,20 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.starter.SpringWebhookBot;
 
+import java.io.Serializable;
 import java.util.Objects;
 @Service("memologyBot")
 public class MemologyWebHookBot extends SpringWebhookBot {
 
     private static final String COMMAND_PREFIX = "/";
     private final MemologyBotPropertiesHolder propertiesHolder;
-    private final TelegramMessageHandler telegramMessageHandler;
-    private final CommandHandler commandHandler;
+    private final TelegramMessageHandler<Message> telegramMessageHandler;
+    private final CommandHandler<? extends Serializable> commandHandler;
 
     public MemologyWebHookBot(SetWebhook setWebhook,
                               MemologyBotPropertiesHolder propertiesHolder,
-                              TelegramMessageHandler telegramMessageHandler,
-                              CommandHandler commandHandler) {
+                              TelegramMessageHandler<Message> telegramMessageHandler,
+                              CommandHandler<? extends Serializable> commandHandler) {
         super(setWebhook);
         this.propertiesHolder = propertiesHolder;
         this.telegramMessageHandler = telegramMessageHandler;
@@ -44,8 +45,7 @@ public class MemologyWebHookBot extends SpringWebhookBot {
         if(Objects.nonNull(update) && update.hasMessage()) {
             var message = update.getMessage();
             if(isCommand(message)){
-                commandHandler.handleCommand(message.getText(), message);
-                return null;
+                return commandHandler.handleCommand(message.getText(), message);
             }
 
             return telegramMessageHandler.handleMessage(update.getMessage());
