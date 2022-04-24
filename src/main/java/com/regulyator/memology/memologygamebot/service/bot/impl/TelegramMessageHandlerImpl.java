@@ -7,7 +7,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
-public class TelegramMessageHandlerImpl implements TelegramMessageHandler {
+public class TelegramMessageHandlerImpl implements TelegramMessageHandler<Message> {
     @Override
     public BotApiMethod<Message> handleMessage(Message message) {
         return SendMessage.builder()
