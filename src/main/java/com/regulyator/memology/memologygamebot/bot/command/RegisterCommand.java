@@ -14,7 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 @Slf4j
 public class RegisterCommand implements Command<Message> {
 
-    private static final String TOKEN = "/register";
+    private static final String TOKEN = "register";
     private static final String DESCRIPTION = "Registration command";
     private static final String SUCCESS_REGISTRATION_MSG = "Это успех, Вы успешно зарегистрированы!";
     private static final String ERROR_REGISTRATION_MSG = "Упс, что-то пошло не так:(";
@@ -22,7 +22,7 @@ public class RegisterCommand implements Command<Message> {
 
     @Override
     public String getCommandToken() {
-        return TOKEN;
+        return COMMAND_START_TOKEN + TOKEN;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class RegisterCommand implements Command<Message> {
     public SendMessage handle(@NonNull Message message) {
         var user = message.getFrom();
         var chatId = String.valueOf(message.getChatId());
-        log.info("get register command, user id {}", user.getId());
+        log.info("get {} command, user id {}", TOKEN, user.getId());
         var result = userService.registerUser(UserInfo.builder()
                         .id(user.getId())
                         .userName(user.getUserName())

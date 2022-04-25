@@ -6,6 +6,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 public interface Command<E extends BotApiObject> {
 
+    String COMMAND_START_TOKEN = "/";
+
     String getCommandToken();
 
     String getCommandDescription();
