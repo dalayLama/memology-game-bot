@@ -1,6 +1,8 @@
-package com.regulyator.memology.memologygamebot.bot.command;
+package com.regulyator.memology.memologygamebot.bot.command.impl;
 
+import com.regulyator.memology.memologygamebot.bot.command.Command;
 import com.regulyator.memology.memologygamebot.dto.UserInfo;
+import com.regulyator.memology.memologygamebot.service.bot.TelegramApiExecutor;
 import com.regulyator.memology.memologygamebot.service.external.UserService;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -14,15 +16,16 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 @Slf4j
 public class RegisterCommand implements Command<Message> {
 
-    private static final String TOKEN = "/register";
+    private static final String TOKEN = "register";
     private static final String DESCRIPTION = "Registration command";
     private static final String SUCCESS_REGISTRATION_MSG = "Это успех, Вы успешно зарегистрированы!";
     private static final String ERROR_REGISTRATION_MSG = "Упс, что-то пошло не так:(";
     private final UserService userService;
+    private final TelegramApiExecutor<Message> telegramApiExecutor;
 
     @Override
     public String getCommandToken() {
-        return TOKEN;
+        return COMMAND_START_TOKEN + TOKEN;
     }
 
     @Override
@@ -31,20 +34,20 @@ public class RegisterCommand implements Command<Message> {
     }
 
     @Override
-    public SendMessage handle(@NonNull Message message) {
+    public Message handle(@NonNull Message message) {
         var user = message.getFrom();
         var chatId = String.valueOf(message.getChatId());
-        log.info("get register command, user id {}", user.getId());
+        log.info("get {} command, user id {}", TOKEN, user.getId());
         var result = userService.registerUser(UserInfo.builder()
-                        .id(user.getId())
-                        .userName(user.getUserName())
-                        .firstName(user.getFirstName())
-                        .lastName(user.getLastName())
+                .id(user.getId())
+                .userName(user.getUserName())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
                 .build());
-        return SendMessage.builder()
+        return telegramApiExecutor.execute(SendMessage.builder()
                 .chatId(chatId)
                 .text(result ? SUCCESS_REGISTRATION_MSG :
                         ERROR_REGISTRATION_MSG)
-                .build();
+                .build());
     }
 }
