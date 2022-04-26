@@ -14,12 +14,19 @@ public class MainKeyboardMaker implements KeyboardMaker<ReplyKeyboardMarkup> {
 
     @Override
     public ReplyKeyboardMarkup getKeyboard() {
-        KeyboardRow row1 = new KeyboardRow();
-        row1.add(new KeyboardButton(Buttons.REGISTER.getButtonName()));
-        row1.add(new KeyboardButton(Buttons.PIDOR.getButtonName()));
+        KeyboardRow gameActionsRow = new KeyboardRow();
+
+        gameActionsRow.add(new KeyboardButton(Buttons.START_GAME.getButtonName()));
+        gameActionsRow.add(new KeyboardButton(Buttons.STATISTIC.getButtonName()));
+
+        KeyboardRow serviceActionsRow = new KeyboardRow();
+
+        serviceActionsRow.add(new KeyboardButton(Buttons.REGISTER.getButtonName()));
+
 
         List<KeyboardRow> keyboard = new ArrayList<>();
-        keyboard.add(row1);
+        keyboard.add(gameActionsRow);
+        keyboard.add(serviceActionsRow);
 
         final ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
         replyKeyboardMarkup.setKeyboard(keyboard);

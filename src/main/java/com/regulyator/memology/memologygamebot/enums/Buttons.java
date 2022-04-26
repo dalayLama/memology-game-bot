@@ -7,7 +7,8 @@ import lombok.RequiredArgsConstructor;
 @Getter
 public enum Buttons {
     REGISTER("Регистрация"),
-    PIDOR("Артур пидор");
+    START_GAME("Начать игру"),
+    STATISTIC("Статистика");
 
     private final String buttonName;
 
